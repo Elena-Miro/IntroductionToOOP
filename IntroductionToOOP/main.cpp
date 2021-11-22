@@ -22,7 +22,37 @@ public:
 	{
 		this->y = y;
 	}
+	/*Point()
+	{
+		x = y = 0;
+		cout << "DefaultConstuctor:\t" << this << endl;
+	}*/
+	/*Point(double x)
+	{
+		this->x = x;
+		this->y = 0;
+		cout << "1argConstructor:\t" << this << endl;
+	}*/
+	Point(double x=0,double y=0)
+	{
+		this->x = x;
+		this->y = y;
+		cout << "Constructor:\t" << this << endl;
+	}
+
+	~Point()
+	{
+		cout << "Destructor:\t" << this << endl;
+	}
+	
+	void print()const
+	{
+		cout << "X= " << x << "\tY=" << y << endl;
+	}
 };
+
+//Point G;//Глобальный объект
+int g;//Глобальная переменная
 //#define STRUCT_POINT
 void main()
 {
@@ -38,8 +68,16 @@ void main()
 #endif // STRUCT_POINT
 
 	Point A;
-	A.set_x(2);
-	A.set_y(3);
-	cout << A.get_x() << tab << A.get_y() << endl;
+	/*A.set_x(2);
+	A.set_y(3);*/
+	//cout << A.get_x() << tab << A.get_y() << endl;
+	A.print();
 
+	Point B(4, 5);
+	B.print();
+
+	Point C = 5;//single argument constructor
+	C.print();
+	Point D(8);
+	D.print();
 }
