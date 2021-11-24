@@ -44,16 +44,31 @@ public:
 	{
 		cout << "Destructor:\t" << this << endl;
 	}
+	double distance(Point other)//другая точка
+	{
+		double x_distance = this->x - other.x;
+		double y_distance = this->y - other.y;
+		double distance = sqrt(x_distance * x_distance + y_distance * y_distance);
+		return distance;
+	}
 	
 	void print()const
 	{
 		cout << "X= " << x << "\tY=" << y << endl;
 	}
 };
+double distance(Point A, Point B)
+{
+	double x_distance = A.get_x() - B.get_x();
+	double y_distance = A.get_y() - B.get_y();
+	return sqrt(x_distance * x_distance + y_distance * y_distance);
+}
 
 //Point G;//Глобальный объект
 int g;//Глобальная переменная
 //#define STRUCT_POINT
+//#define CONSTRUCTORS_CHEK
+//#define DISTANCE 
 void main()
 {
 	setlocale(LC_ALL, "Russian");
@@ -67,6 +82,7 @@ void main()
 	cout << pA->x << tab << pA->y << endl;
 #endif // STRUCT_POINT
 
+#ifdef CONSTRUCTORS_CHEK
 	Point A;
 	/*A.set_x(2);
 	A.set_y(3);*/
@@ -80,4 +96,16 @@ void main()
 	C.print();
 	Point D(8);
 	D.print();
+#endif // CONSTRUCTORS_CHEK
+#ifdef DISTANCE
+	Point A(2, 3);
+	Point B(3, 4);
+	cout << "Расстояние от точки А до точки В:" << A.distance(B) << endl;
+	cout << "Расстояние от точки B до точки A:" << B.distance(A) << endl;
+	cout << "Расстояние от точки А до точки В:" << distance(A, B) << endl;
+	cout << "Расстояние от точки B до точки A:" << distance(B, A) << endl;
+#endif // DISTANCE
+
+
+
 }
