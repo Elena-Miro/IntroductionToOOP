@@ -39,11 +39,24 @@ public:
 		this->y = y;
 		cout << "Constructor:\t" << this << endl;
 	}
+	Point(const Point& other)
+	{
+		this->x = other.x;
+		this->y = other.y;
+		cout << "CopyConstructor:\t" << this << endl;
+	}
 
 	~Point()
 	{
 		cout << "Destructor:\t" << this << endl;
 	}
+	void operator=(const Point& other)
+	{
+		this->x = other.x;
+		this->y = other.y;
+		cout << "CopyAssignment:\t" << this << endl;
+	}
+
 	double distance(Point other)//другая точка
 	{
 		double x_distance = this->x - other.x;
@@ -67,7 +80,7 @@ double distance(Point A, Point B)
 //Point G;//Глобальный объект
 int g;//Глобальная переменная
 //#define STRUCT_POINT
-//#define CONSTRUCTORS_CHEK
+#define CONSTRUCTORS_CHEK
 //#define DISTANCE 
 void main()
 {
@@ -96,6 +109,13 @@ void main()
 	C.print();
 	Point D(8);
 	D.print();
+	Point E = D;
+	E.print();
+	Point F(B);
+	F.print();
+	Point G;
+	G = F;//CopyAssiment(operator=)
+	G.print();
 #endif // CONSTRUCTORS_CHEK
 #ifdef DISTANCE
 	Point A(2, 3);
