@@ -50,14 +50,28 @@ public:
 	{
 		cout << "Destructor:\t" << this << endl;
 	}
-	void operator=(const Point& other)
+	Point& operator=(const Point& other)
 	{
 		this->x = other.x;
 		this->y = other.y;
 		cout << "CopyAssignment:\t" << this << endl;
+		return *this;
+	}
+	Point& operator++()
+	{
+		this->x++;
+		this->y++;
+		return *this;
+	}
+	Point operator++(int)//Постфиксное значение инкремента
+	{
+		Point old = *this;//сохраняем старое значение объекта
+		x++;
+		y++;
+		return old;//старое не изменяемое значение объекта
 	}
 
-	double distance(Point other)//другая точка
+	double distance(const Point& other)const//другая точка
 	{
 		double x_distance = this->x - other.x;
 		double y_distance = this->y - other.y;
@@ -70,18 +84,27 @@ public:
 		cout << "X= " << x << "\tY=" << y << endl;
 	}
 };
-double distance(Point A, Point B)
+double distance(const Point& A,const Point& B)
 {
 	double x_distance = A.get_x() - B.get_x();
 	double y_distance = A.get_y() - B.get_y();
 	return sqrt(x_distance * x_distance + y_distance * y_distance);
 }
+Point operator+(const Point& left, const Point& right)
+{
+	Point result;
+	result.set_x(left.get_x() + right.get_x());
+	result.set_y(left.get_y() + right.get_y());
+	return result;
+}
+
 
 //Point G;//Глобальный объект
 int g;//Глобальная переменная
 //#define STRUCT_POINT
-#define CONSTRUCTORS_CHEK
+//#define CONSTRUCTORS_CHEK
 //#define DISTANCE 
+//#define ASSIGNEMENT_CHECK
 void main()
 {
 	setlocale(LC_ALL, "Russian");
@@ -120,12 +143,40 @@ void main()
 #ifdef DISTANCE
 	Point A(2, 3);
 	Point B(3, 4);
+	cout << "\n----------------------------------------------\n";
 	cout << "Расстояние от точки А до точки В:" << A.distance(B) << endl;
+	cout << "\n----------------------------------------------\n";
 	cout << "Расстояние от точки B до точки A:" << B.distance(A) << endl;
+	cout << "\n----------------------------------------------\n";
 	cout << "Расстояние от точки А до точки В:" << distance(A, B) << endl;
+	cout << "\n----------------------------------------------\n";
 	cout << "Расстояние от точки B до точки A:" << distance(B, A) << endl;
+	cout << "\n----------------------------------------------\n";
 #endif // DISTANCE
+#ifdef ASSIGNEMENT_CHECK
+	int a, b, c;
+	a = b = c = 0;
+	cout << a << tab << b << tab << c;
 
-
-
+	Point A, B, C;
+	cout << "\n----------------------------------------------\n";
+	A = B = C = Point(2, 3);
+	//Point(2,3)явно вызываем конструктор, который создает временный безымянный объект 
+	cout << "\n----------------------------------------------\n";
+	A.print();
+	B.print();
+	C.print();
+#endif // ASSIGNEMENT_CHECK
+	int a = 2;
+	int b = 4;
+	int c = a+b;
+	Point A(2, 3);
+	Point B(4, 5);
+	/*Point C = A + B;
+	C.print();
+	C++;
+	C.print();*/
+	B = ++A;
+	A.print();
+	B.print();
 }
