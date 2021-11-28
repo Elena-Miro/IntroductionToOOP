@@ -1,4 +1,4 @@
-#include<iostream>
+п»ї#include<iostream>
 using namespace std;
 #define tab "\t"
 class Point
@@ -57,7 +57,7 @@ public:
 		cout << "CopyAssignment:\t" << this << endl;
 	}
 
-	double distance(Point other)//другая точка
+	double distance(Point other)//РґСЂСѓРіР°СЏ С‚РѕС‡РєР°
 	{
 		double x_distance = this->x - other.x;
 		double y_distance = this->y - other.y;
@@ -77,8 +77,8 @@ double distance(Point A, Point B)
 	return sqrt(x_distance * x_distance + y_distance * y_distance);
 }
 
-//Point G;//Глобальный объект
-int g;//Глобальная переменная
+//Point G;//Р“Р»РѕР±Р°Р»СЊРЅС‹Р№ РѕР±СЉРµРєС‚
+int g;//Р“Р»РѕР±Р°Р»СЊРЅР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ
 //#define STRUCT_POINT
 #define CONSTRUCTORS_CHEK
 //#define DISTANCE 
@@ -120,10 +120,10 @@ void main()
 #ifdef DISTANCE
 	Point A(2, 3);
 	Point B(3, 4);
-	cout << "Расстояние от точки А до точки В:" << A.distance(B) << endl;
-	cout << "Расстояние от точки B до точки A:" << B.distance(A) << endl;
-	cout << "Расстояние от точки А до точки В:" << distance(A, B) << endl;
-	cout << "Расстояние от точки B до точки A:" << distance(B, A) << endl;
+	cout << "Р Р°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ С‚РѕС‡РєРё Рђ РґРѕ С‚РѕС‡РєРё Р’:" << A.distance(B) << endl;
+	cout << "Р Р°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ С‚РѕС‡РєРё B РґРѕ С‚РѕС‡РєРё A:" << B.distance(A) << endl;
+	cout << "Р Р°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ С‚РѕС‡РєРё Рђ РґРѕ С‚РѕС‡РєРё Р’:" << distance(A, B) << endl;
+	cout << "Р Р°СЃСЃС‚РѕСЏРЅРёРµ РѕС‚ С‚РѕС‡РєРё B РґРѕ С‚РѕС‡РєРё A:" << distance(B, A) << endl;
 #endif // DISTANCE
 
 
