@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IntroductionToOOP", "IntroductionToOOP\IntroductionToOOP.vcxproj", "{B0A59494-FF57-4A8B-A596-D571B04DDF3E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fraction", "Fraction\Fraction.vcxproj", "{3F1BB91A-3A0D-48A9-B7EE-15990D3D711A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{B0A59494-FF57-4A8B-A596-D571B04DDF3E}.Release|x64.Build.0 = Release|x64
 		{B0A59494-FF57-4A8B-A596-D571B04DDF3E}.Release|x86.ActiveCfg = Release|Win32
 		{B0A59494-FF57-4A8B-A596-D571B04DDF3E}.Release|x86.Build.0 = Release|Win32
+		{3F1BB91A-3A0D-48A9-B7EE-15990D3D711A}.Debug|x64.ActiveCfg = Debug|x64
+		{3F1BB91A-3A0D-48A9-B7EE-15990D3D711A}.Debug|x64.Build.0 = Debug|x64
+		{3F1BB91A-3A0D-48A9-B7EE-15990D3D711A}.Debug|x86.ActiveCfg = Debug|Win32
+		{3F1BB91A-3A0D-48A9-B7EE-15990D3D711A}.Debug|x86.Build.0 = Debug|Win32
+		{3F1BB91A-3A0D-48A9-B7EE-15990D3D711A}.Release|x64.ActiveCfg = Release|x64
+		{3F1BB91A-3A0D-48A9-B7EE-15990D3D711A}.Release|x64.Build.0 = Release|x64
+		{3F1BB91A-3A0D-48A9-B7EE-15990D3D711A}.Release|x86.ActiveCfg = Release|Win32
+		{3F1BB91A-3A0D-48A9-B7EE-15990D3D711A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
