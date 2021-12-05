@@ -6,6 +6,10 @@ using std::endl;
 #define tab "\t"
 class Fraction;
 Fraction operator*(Fraction left, Fraction right);
+Fraction operator+(Fraction left, Fraction right);
+Fraction operator-(Fraction left, Fraction right);
+Fraction operator/(Fraction left, Fraction right);
+
 class Fraction
 {
 	int integer;
@@ -75,6 +79,19 @@ public:
 	{
 		return *this = *this * other;
 	}
+	Fraction& operator+=(const Fraction& other)
+	{
+		return *this = *this + other;
+	}
+	Fraction& operator-=(const Fraction& other)
+	{
+		return *this = *this - other;
+	}
+	Fraction& operator/=(const Fraction& other)
+	{
+		return *this = *this / other;
+	}
+
 	Fraction& to_improper()//Переводит дробь в правильную
 	{
 		numerator += integer * denominator;
@@ -152,6 +169,65 @@ Fraction operator/(Fraction left,Fraction right)
 {
 	return left * right.inverted();
 }
+Fraction operator+(Fraction right, Fraction left)
+{
+	left.to_improper();
+	right.to_improper();
+	return Fraction
+	(left.get_numerator()*right.get_denominator()+
+		right.get_numerator()*left.get_denominator(),
+		left.get_denominator()*right.get_denominator()
+	).to_proper().reduce();
+
+}
+Fraction operator-(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	return Fraction
+	(left.get_numerator() * right.get_denominator() -
+		right.get_numerator() * left.get_denominator(),
+		left.get_denominator() * right.get_denominator()
+	).to_proper().reduce();
+
+}
+bool operator==(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	return left.get_numerator() * right.get_denominator() ==
+		right.get_numerator() * left.get_denominator();
+	
+}
+bool operator!=(Fraction left, Fraction right)
+{
+	
+	return !(left == right);
+
+}
+bool operator>(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	return left.get_numerator() * right.get_denominator() >
+		right.get_numerator() * left.get_denominator();
+}
+bool operator<(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	return left.get_numerator() * right.get_denominator() <
+		right.get_numerator() * left.get_denominator();
+}
+bool operator>=(Fraction left, Fraction right)
+{
+	return !(left < right);
+}
+bool operator<=(Fraction left, Fraction right)
+{
+	return !(left > right);
+}
+
 //#define CONSTRUCTORS_CHECK
 void main()
 {
@@ -175,15 +251,74 @@ void main()
 	double b = 3.4;
 	double c = a * b;
 	cout << c << endl;
-
+	cout << "_____________________________" << endl;
 	Fraction A(2, 1, 2);
 	Fraction B(3, 2, 5);
-	/*Fraction C = A * B;
-	//C.reduce();
-	C.print();*/
-	
-	/*C = A / B;
-	C.print();*/
-	A *= B;
+	Fraction C = A * B;
+	C.reduce();
+	C.print();
+	cout << "_____________________________" << endl;
+	C = A / B;
+	C.print();
+	cout << "_____________________________" << endl;
+	//A *= B;
+	//A.print();
+	cout << "_____________________________" << endl;
+	C = A + B;
+	C.print();
+	cout << "_____________________________" << endl;
+	C =A-B;
+	C.print();
+	cout << "_____________________________" << endl;
+	C += B;
+	C.print();
+	cout << "_____________________________" << endl;
+	C -= B;
+	C.print();
+	cout << "_____________________________" << endl;
+	C /= B;
+	C.print();
+	cout << "_____________________________" << endl;
+	if (A == B)
+		cout << "true" << endl;
+	else
+		cout << "false" << endl;
+	cout << "_____________________________" << endl;
+	if (A != B)
+		cout << "true" << endl;
+	else
+		cout << "false" << endl;
+	cout << "_____________________________"<<endl;
 	A.print();
+	B.print();
+	if (A > B)
+		
+		cout << "true" << endl;
+	else
+		cout << "false" << endl;
+	cout << "_____________________________" << endl;
+	A.print();
+	B.print();
+	if (A < B)
+
+		cout << "true" << endl;
+	else
+		cout << "false" << endl;
+	cout << "_____________________________" << endl;
+	
+	A.print();
+	B.print();
+	if (A >= B)
+
+		cout << "true" << endl;
+	else
+		cout << "false" << endl;
+	A.print();
+	B.print();
+	if (A <= B)
+
+		cout << "true" << endl;
+	else
+		cout << "false" << endl;
+
 }
