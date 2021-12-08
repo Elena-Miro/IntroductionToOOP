@@ -1,4 +1,5 @@
-﻿#include<iostream>
+﻿#pragma warning(disable:4326)
+#include<iostream>
 using namespace std;
 using std::cin;
 using std::cout;
@@ -49,7 +50,7 @@ public:
 		this->denominator = 1;
 		cout << "DefaultConstructor:\t" << this << endl;
 	}
-	Fraction(int integer)
+	explicit Fraction(int integer)
 	{
 		this->integer = integer;
 		this->numerator = 0;
@@ -90,6 +91,11 @@ public:
 	Fraction& operator/=(const Fraction& other)
 	{
 		return *this = *this / other;
+	}
+	//Type-cast operators:
+	explicit operator int()const
+	{
+		return integer;
 	}
 
 	Fraction& to_improper()//Переводит дробь в правильную
@@ -148,6 +154,14 @@ public:
 		}
 		else if (integer == 0)cout << 0;
 		cout << endl;
+	}
+	Fraction& operator=(const Fraction& other)
+	{
+		this->integer = other.integer;
+		this->numerator = other.numerator;
+		this->denominator = other.denominator;
+		cout << "CopyAssignment:\t" << this << endl;
+		return *this;
 	}
 };
 Fraction operator*(Fraction left, Fraction right)
@@ -229,6 +243,9 @@ bool operator<=(Fraction left, Fraction right)
 }
 
 //#define CONSTRUCTORS_CHECK
+//#define OPERATORS_CHECK
+//#define TYPE_CONVERSIONS_BASICS
+//#define CONVERSIONS_FROM_OTHER_TO_CLASS
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -246,6 +263,8 @@ void main()
 	cout << "Введите 2 числа: "; cin >> a >> b;
 	cout << a / b << endl;*/
 #endif // CONSTRUCTORS_CHECK
+
+#ifdef OPERATORS_CHECK
 
 	double a = 2.5;
 	double b = 3.4;
@@ -320,5 +339,34 @@ void main()
 		cout << "true" << endl;
 	else
 		cout << "false" << endl;
+#endif // OPERATORS_CHECK
 
+#ifdef TYPE_CONVERSIONS_BASICS
+	int a = 2; //нет преобразования
+	double b = 3; // from less to more
+	int c = b;//из большего в меньшее из double 
+	int d = 4.5;// от большего к меньшему с потерей данных
+	cout << d << endl;
+#endif // TYPE_CONVERSIONS_BASICS
+#ifdef CONVERSIONS_FROM_OTHER_TO_CLASS
+	double a = 2;//from int to double
+	Fraction A = 5;//from int to Fraction
+	//single-argument construction
+	A.print();
+	Fraction B;
+	B = 8;
+	B.print();
+	//Fraction C = 12;no
+	Fraction C(12);
+	Fraction D{ 13 };//или так  
+#endif // CONVERSIONS_FROM_OTHER_TO_CLASS
+	Fraction A(2);
+	int a (A);
+	cout << a << endl;
+	Fraction A(2, 3, 4);
+	double a = A;
+	cout << a << endl;
+	double b = 2.75;
+	Fraction B = b;
+	B.print();
 }
