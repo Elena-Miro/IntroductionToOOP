@@ -59,6 +59,7 @@ public:
 	}
 	Fraction(double decimal)
 	{
+		decimal += 1e-11;
 		integer = decimal;
 		denominator = 1e+9;//Экспонента системы счисления
 		numerator = (decimal - integer) * denominator;
@@ -105,7 +106,7 @@ public:
 	{
 		return integer;
 	}
-	operator double()const
+	explicit operator double()const
 	{
 		return integer+(double)numerator/denominator;
 	}
@@ -155,17 +156,17 @@ public:
 	}
 	
 	
-	void print()const
+	std::ostream& print(std::ostream& os)const
 	{
-		if (integer)cout << integer;
+		if (integer)os << integer;
 		if (numerator)
 		{
-			if (integer) cout << "(";
-			cout << numerator << "/" << denominator;
-			if (integer)cout << ")";
+			if (integer) os << "(";
+			os << numerator << "/" << denominator;
+			if (integer)os << ")";
 		}
-		else if (integer == 0)cout << 0;
-		cout << endl;
+		else if (integer == 0)os << 0;
+		return os;
 	}
 	Fraction& operator=(const Fraction& other)
 	{
@@ -252,12 +253,26 @@ bool operator>=(Fraction left, Fraction right)
 bool operator<=(Fraction left, Fraction right)
 {
 	return !(left > right);
+}//type        name      (operators                           )
+std::ostream& operator<<(std::ostream& os, const Fraction& obj)
+{
+	/*if (obj.get_integer())os << obj.get_integer();
+	if (obj.get_numerator())
+	{
+		if (obj.get_integer()) os << "(";
+		os << obj.get_numerator() << "/" << obj.get_denominator();
+		if (obj.get_integer())os << ")";
+	}
+	else if (obj.get_integer() == 0)os << 0;
+	return os;*/
+	return obj.print(os);//
 }
 
 //#define CONSTRUCTORS_CHECK
 //#define OPERATORS_CHECK
 //#define TYPE_CONVERSIONS_BASICS
 //#define CONVERSIONS_FROM_OTHER_TO_CLASS
+//#define HOMEWORK
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -376,14 +391,22 @@ void main()
 	//int a (A);
 	//cout << a << endl;
 
+#ifdef HOMEWORK
 	Fraction A(2, 3, 4);
 	double a = A;
 	cout << a << endl;
 
 
-	double b = 2.75;
+	double b = 2.76;
 	Fraction B = b; //преобразуем другой тип в наш, нуужен конструктор с 1 параметром типа double
 	B.print();
 
+#endif // HOMEWORK
+	Fraction A(2, 3, 4);
+	cout << A << endl;
+
+	Fraction A;
+	cout << "Введите простую дробь: "; cin >> A;
+	cout << A << endl; //cin является объектом класса istream
 
 }
