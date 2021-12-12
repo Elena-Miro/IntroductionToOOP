@@ -57,7 +57,13 @@ public:
 		this->denominator = 1;
 		cout << "1argConstructor:\t" << this << endl;
 	}
-	
+	Fraction(double decimal)
+	{
+		integer = decimal;
+		denominator = 1e+9;//Экспонента системы счисления
+		numerator = (decimal - integer) * denominator;
+		reduce();
+	}
 
 	Fraction(int numerator,int denominator)
 	{
@@ -375,9 +381,9 @@ void main()
 	cout << a << endl;
 
 
-	/*double b = 2.75;
-	Fraction B = b;
-	B.print();*/
+	double b = 2.75;
+	Fraction B = b; //преобразуем другой тип в наш, нуужен конструктор с 1 параметром типа double
+	B.print();
 
 
 }
