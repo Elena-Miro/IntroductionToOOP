@@ -57,6 +57,8 @@ public:
 		this->denominator = 1;
 		cout << "1argConstructor:\t" << this << endl;
 	}
+	
+
 	Fraction(int numerator,int denominator)
 	{
 		this->integer = 0;
@@ -96,6 +98,10 @@ public:
 	explicit operator int()const
 	{
 		return integer;
+	}
+	operator double()const
+	{
+		return integer+(double)numerator/denominator;
 	}
 
 	Fraction& to_improper()//Переводит дробь в правильную
@@ -360,13 +366,18 @@ void main()
 	Fraction C(12);
 	Fraction D{ 13 };//или так  
 #endif // CONVERSIONS_FROM_OTHER_TO_CLASS
-	Fraction A(2);
-	int a (A);
-	cout << a << endl;
+	//Fraction A(2);
+	//int a (A);
+	//cout << a << endl;
+
 	Fraction A(2, 3, 4);
 	double a = A;
 	cout << a << endl;
-	double b = 2.75;
+
+
+	/*double b = 2.75;
 	Fraction B = b;
-	B.print();
+	B.print();*/
+
+
 }
