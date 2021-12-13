@@ -253,7 +253,8 @@ bool operator>=(Fraction left, Fraction right)
 bool operator<=(Fraction left, Fraction right)
 {
 	return !(left > right);
-}//type        name      (operators                           )
+};
+//type        name      (operators                           )
 std::ostream& operator<<(std::ostream& os, const Fraction& obj)
 {
 	/*if (obj.get_integer())os << obj.get_integer();
@@ -266,6 +267,46 @@ std::ostream& operator<<(std::ostream& os, const Fraction& obj)
 	else if (obj.get_integer() == 0)os << 0;
 	return os;*/
 	return obj.print(os);//
+}
+std::istream& operator>>(std::istream& is, Fraction& obj)
+{
+	/*int integer;
+	int numerator;
+	int denominator;
+	
+	 is >> integer>> numerator>>denominator;
+	 obj.set_denominator(denominator);
+	 obj.set_numerator(numerator);
+	 obj.set_integer(integer);*/
+	obj = Fraction();//обнуляем объект
+	const int SIZE = 256;
+	char buffer[SIZE] = {};
+	char delimiters[] = "() /";
+	is.getline(buffer, SIZE);
+	char* number[3] = {};//Этот массив будет хранить части строки , полученные при помощи strtok
+	int n = 0;
+	for (char* pch = strtok(buffer, delimiters); pch; pch = strtok(NULL, delimiters))
+	{
+		number[n++] = pch;
+	}
+	/*for (int i = 0; i < n; i++)
+	{
+		cout << number[i] << "\t";
+	}
+	cout << endl;*/
+	switch (n)
+	{
+	case 1:obj.set_integer(atoi(number[0])); break;//atoi ASCI string прееобразует строку аски символов в значение типа int
+	case 2:
+		obj.set_numerator(atoi(number[0]));
+		obj.set_denominator(atoi(number[1]));
+		break;
+	case 3:
+		obj.set_integer(atoi(number[0]));
+		obj.set_numerator(atoi(number[1]));
+		obj.set_denominator(atoi(number[2]));
+	}
+	 return is;
 }
 
 //#define CONSTRUCTORS_CHECK
@@ -402,8 +443,8 @@ void main()
 	B.print();
 
 #endif // HOMEWORK
-	Fraction A(2, 3, 4);
-	cout << A << endl;
+	//Fraction A(2, 3, 4);
+	//cout << A << endl;
 
 	Fraction A;
 	cout << "Введите простую дробь: "; cin >> A;
