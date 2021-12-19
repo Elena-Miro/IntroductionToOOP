@@ -3,6 +3,9 @@ using namespace std;
 using std::cin;
 using std::cout;
 using std::endl;
+#define delimeter cout<<"------------------\n";
+class String;
+String operator+(const String& left, const String& right);
 
 class String
 {
@@ -58,6 +61,18 @@ public:
 		cout << "CopyAssignment:\t" << this << endl;
 		return *this;
 	}
+	char& operator[](int i)
+	{
+		return str[i];
+	}
+	const char& operator[](int i) const
+	{
+		return str[i];
+	}
+	String& operator+=(const String& other)
+	{
+		return *this = *this + other;
+	}
 	//Metods
 
 	void print()const
@@ -70,17 +85,33 @@ String operator+(const String& left, const String& right)
 {
 	String result(left.get_size() + right.get_size()-1);//убираем 1 детерминрующий ноль
 	for (int i = 0; i < left.get_size(); i++)
-		result.get_str()[i] = left.get_str()[i];
+		//result.get_str()[i] = left.get_str()[i];
+		result[i] = left[i];
 	for (int i = 0; i < right.get_size(); i++)
-		result.get_str()[i + left.get_size() - 1] = right.get_str()[i];
+		//result.get_str()[i + left.get_size() - 1] = right.get_str()[i];
+		result[i + left.get_size() - 1] = right[i];
 	return result;
+
 	
 }
 std::ostream& operator<<(std::ostream & os, const String& obj)
 {
 	return os << obj.get_str();
 }
+std::istream& operator>>(std::istream& is, String& obj)
+{
+	is.getline(obj.get_str(), 80);
+	int size = strlen(obj.get_str()) + 1;
+	String str(size);//Создаем объект
+	for (int i = 0; i < size; i++)
+	{
+		str[i] = obj[i];
+	}
+	obj = str;//Присваивает значения объекта obj 
+	return is;
+}
 //#define CONSTRUCTORS_CHECK
+//#define CLASS_WORK
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -102,9 +133,25 @@ void main()
 	str5 = str3;//Объект уже существует оператор присвоить
 	cout << str5 << endl;
 #endif // CONSRTUCRS_CHECK 
+	
+#ifdef CLASS_WORK
+	delimeter;
 	String str1 = "Hello";
+	delimeter;
 	String str2 = "World";
+	delimeter;
 	String str3 = str1 + str2;
+	delimeter;
 	cout << str3 << endl;
-
+	delimeter;
+	str1 += str2;
+	cout << str1 << endl;
+	delimeter;
+	
+#endif // CLASS_WORK
+	String str;
+	cout << "Введите строку: "; cin >> str;
+	cout << str;
+	delimeter;
+	str.print();
 }
