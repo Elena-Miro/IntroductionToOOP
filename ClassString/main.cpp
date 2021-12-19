@@ -1,4 +1,4 @@
-#include<iostream>
+п»ї#include<iostream>
 using namespace std;
 using std::cin;
 using std::cout;
@@ -9,8 +9,8 @@ String operator+(const String& left, const String& right);
 
 class String
 {
-	int size;//Размер строки Размер строки в байтах
-	char* str;//Адрес строки в динамической памяти
+	int size;//Р Р°Р·РјРµСЂ СЃС‚СЂРѕРєРё Р Р°Р·РјРµСЂ СЃС‚СЂРѕРєРё РІ Р±Р°Р№С‚Р°С…
+	char* str;//РђРґСЂРµСЃ СЃС‚СЂРѕРєРё РІ РґРёРЅР°РјРёС‡РµСЃРєРѕР№ РїР°РјСЏС‚Рё
 
 public:
 	int get_size()const
@@ -28,7 +28,7 @@ public:
 	explicit String(int size = 80)
 	{
 		this->size = size;
-		this->str = new char[size] {};//Память для строки обязательно зануляем
+		this->str = new char[size] {};//РџР°РјСЏС‚СЊ РґР»СЏ СЃС‚СЂРѕРєРё РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ Р·Р°РЅСѓР»СЏРµРј
 		cout << "Constructor:\t" << this << endl;
 	}
 	String(const char str[])
@@ -38,7 +38,7 @@ public:
 		for (int i = 0; str[i]; i++)this->str[i] = str[i];
 		cout << "Constructor:\t" << this << endl;
 	}
-	String(const String& other)//Побитовое копирование Deep copy
+	String(const String& other)//РџРѕР±РёС‚РѕРІРѕРµ РєРѕРїРёСЂРѕРІР°РЅРёРµ Deep copy
 	{
 		this->size = other.size;
 		this->str = new char[size] {};
@@ -53,7 +53,7 @@ public:
 	//Operators
 	String & operator=(const String& other)
 	{
-		if (this == &other)return *this;//не являются ли this и other одним и тем же объектом
+		if (this == &other)return *this;//РЅРµ СЏРІР»СЏСЋС‚СЃСЏ Р»Рё this Рё other РѕРґРЅРёРј Рё С‚РµРј Р¶Рµ РѕР±СЉРµРєС‚РѕРј
 		delete[] this->str;
 		this->size = other.size;
 		this->str = new char[size] {};
@@ -83,7 +83,7 @@ public:
 };
 String operator+(const String& left, const String& right)
 {
-	String result(left.get_size() + right.get_size()-1);//убираем 1 детерминрующий ноль
+	String result(left.get_size() + right.get_size()-1);//СѓР±РёСЂР°РµРј 1 РґРµС‚РµСЂРјРёРЅСЂСѓСЋС‰РёР№ РЅРѕР»СЊ
 	for (int i = 0; i < left.get_size(); i++)
 		//result.get_str()[i] = left.get_str()[i];
 		result[i] = left[i];
@@ -102,12 +102,12 @@ std::istream& operator>>(std::istream& is, String& obj)
 {
 	is.getline(obj.get_str(), 80);
 	int size = strlen(obj.get_str()) + 1;
-	String str(size);//Создаем объект
+	String str(size);//РЎРѕР·РґР°РµРј РѕР±СЉРµРєС‚
 	for (int i = 0; i < size; i++)
 	{
 		str[i] = obj[i];
 	}
-	obj = str;//Присваивает значения объекта obj 
+	obj = str;//РџСЂРёСЃРІР°РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёСЏ РѕР±СЉРµРєС‚Р° obj 
 	return is;
 }
 //#define CONSTRUCTORS_CHECK
@@ -126,11 +126,11 @@ void main()
 	str3 = str3;
 	cout << str3 << endl;
 
-	String str4 = str3;//Вызывается конструктор копирования
+	String str4 = str3;//Р’С‹Р·С‹РІР°РµС‚СЃСЏ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёСЂРѕРІР°РЅРёСЏ
 	cout << str4 << endl;
 
 	String str5;
-	str5 = str3;//Объект уже существует оператор присвоить
+	str5 = str3;//РћР±СЉРµРєС‚ СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚ РѕРїРµСЂР°С‚РѕСЂ РїСЂРёСЃРІРѕРёС‚СЊ
 	cout << str5 << endl;
 #endif // CONSRTUCRS_CHECK 
 	
@@ -150,7 +150,7 @@ void main()
 	
 #endif // CLASS_WORK
 	String str;
-	cout << "Введите строку: "; cin >> str;
+	cout << "Р’РІРµРґРёС‚Рµ СЃС‚СЂРѕРєСѓ: "; cin >> str;
 	cout << str;
 	delimeter;
 	str.print();
