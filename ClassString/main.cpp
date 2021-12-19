@@ -49,6 +49,7 @@ public:
 	{
 		delete[]str;
 		cout << "Destructor:\t" << this << endl;
+
 	}
 	//Operators
 	String & operator=(const String& other)
@@ -65,7 +66,7 @@ public:
 	{
 		return str[i];
 	}
-	const char& operator[](int i) const
+	const char& operator[](int i) const//если пишем в конце const то и в начале
 	{
 		return str[i];
 	}
@@ -100,7 +101,7 @@ std::ostream& operator<<(std::ostream & os, const String& obj)
 }
 std::istream& operator>>(std::istream& is, String& obj)
 {
-	is.getline(obj.get_str(), 80);
+	/*is.getline(obj.get_str(), 80);
 	int size = strlen(obj.get_str()) + 1;
 	String str(size);//Создаем объект
 	for (int i = 0; i < size; i++)
@@ -108,6 +109,20 @@ std::istream& operator>>(std::istream& is, String& obj)
 		str[i] = obj[i];
 	}
 	obj = str;//Присваивает значения объекта obj 
+	return is;*/
+	//return is >> obj.get_str();
+	const int SIZE = 10240;
+	char buffer[SIZE] = {};
+	is >> buffer;
+	obj = buffer;
+	return is;
+}
+std::istream& getline(std::istream& is, String& obj)
+{
+	const int SIZE = 10240;
+	char buffer[SIZE] = {};
+	is.getline(buffer, SIZE);
+	obj = buffer;
 	return is;
 }
 //#define CONSTRUCTORS_CHECK
@@ -150,7 +165,8 @@ void main()
 	
 #endif // CLASS_WORK
 	String str;
-	cout << "Введите строку: "; cin >> str;
+	cout << "Введите строку: ";// cin >> str;
+	getline(cin, str);
 	cout << str;
 	delimeter;
 	str.print();
