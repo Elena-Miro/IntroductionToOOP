@@ -25,23 +25,24 @@ public:
 	{
 		return str;
 	}
-	explicit String(int size = 80)
+	explicit String(int size = 80) :size(size), str(new char[size] {})//Заголовок 
 	{
-		this->size = size;
-		this->str = new char[size] {};//Память для строки обязательно зануляем
+		//this->size = size;            //тело
+		//this->str = new char[size] {};//Память для строки обязательно зануляем
 		cout << "Constructor:\t" << this << endl;
 	}
-	String(const char str[])
+	String(const char str[]) :size(strlen(str) + 1), str(new char[size] {})
 	{
-		this->size = strlen(str) + 1;
-		this->str = new char[size] {};
+		//this->size = strlen(str) + 1;
+		//this->str = new char[size] {};
 		for (int i = 0; str[i]; i++)this->str[i] = str[i];
 		cout << "Constructor:\t" << this << endl;
-	}
-	String(const String& other)//Побитовое копирование Deep copy
+	}                            //переменная класса  //присваемое значение
+	String(const String& other) :size                (other.size), str(new char[size] {})
+		//Побитовое копирование Deep copy
 	{
-		this->size = other.size;
-		this->str = new char[size] {};
+		//this->size = other.size;
+		//this->str = new char[size] {};
 		for (int i = 0; i < size; i++)this->str[i] = other.str[i];
 		cout << "CopyConstructor:\t" << this << endl;
 	}
@@ -103,7 +104,7 @@ std::istream& operator>>(std::istream& is, String& obj)
 {
 	/*is.getline(obj.get_str(), 80);
 	int size = strlen(obj.get_str()) + 1;
-	String str(size);//Создаем объект
+	String str/Создаем объект
 	for (int i = 0; i < size; i++)
 	{
 		str[i] = obj[i];
@@ -127,6 +128,7 @@ std::istream& getline(std::istream& is, String& obj)
 }
 //#define CONSTRUCTORS_CHECK
 //#define CLASS_WORK
+//define INPUT_CHECK
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -164,10 +166,24 @@ void main()
 	delimeter;
 	
 #endif // CLASS_WORK
+#ifdef INPUT_CHECK
 	String str;
 	cout << "Введите строку: ";// cin >> str;
 	getline(cin, str);
 	cout << str;
 	delimeter;
 	str.print();
+#endif // INPUT_CHECK
+	String str1;
+	str1.print();
+	String str2 = "Hello";//single
+	str2.print();
+	String str3 = str2;//copyConstructor
+	str3.print();
+	String str4();//это функция ,а не объект
+	//str4.print();
+	String str5{};
+	str5.print();
+	String str6("World");//single
+	String str7{ "Planet" };//single-argument constructor
 }
