@@ -25,24 +25,24 @@ public:
 	{
 		return str;
 	}
-	explicit String(int size = 80)
+	explicit String(int size = 80) :size(size), str(new char[size] {})
 	{
-		this->size = size;
-		this->str = new char[size] {};//Память для строки обязательно зануляем
+		//this->size = size;
+		//this->str = new char[size] {};//Память для строки обязательно зануляем
 		cout << "Constructor:\t" << this << endl;
 	}
-	String(const char str[])
+	String(const char str[]):String(strlen(str)+1)
 	{
-		this->size = strlen(str) + 1;
-		this->str = new char[size] {};
+		//this->size = strlen(str) + 1;
+		//this->str = new char[size] {};
 		for (int i = 0; str[i]; i++)this->str[i] = str[i];
 		cout << "Constructor:\t" << this << endl;
 	}
-	String(const String& other)//Побитовое копирование Deep copy
+	String(const String& other):String(other.str)//Побитовое копирование Deep copy
 	{
-		this->size = other.size;
-		this->str = new char[size] {};
-		for (int i = 0; i < size; i++)this->str[i] = other.str[i];
+		//this->size = other.size;
+		//this->str = new char[size] {};
+		//for (int i = 0; i < size; i++)this->str[i] = other.str[i];
 		cout << "CopyConstructor:\t" << this << endl;
 	}
 	~String()
@@ -126,7 +126,8 @@ std::istream& getline(std::istream& is, String& obj)
 	return is;
 }
 //#define CONSTRUCTORS_CHECK
-//#define CLASS_WORK
+#define CLASS_WORK
+//#define INPUT_CHECK
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -164,10 +165,13 @@ void main()
 	delimeter;
 	
 #endif // CLASS_WORK
+#ifdef INPUT_CHECK
 	String str;
 	cout << "Введите строку: ";// cin >> str;
 	getline(cin, str);
 	cout << str;
 	delimeter;
 	str.print();
+#endif // INPUT_CHECK
+
 }
