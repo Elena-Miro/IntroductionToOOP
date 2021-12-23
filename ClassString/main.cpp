@@ -45,6 +45,18 @@ public:
 		for (int i = 0; i < size; i++)this->str[i] = other.str[i];
 		cout << "CopyConstructor:\t" << this << endl;
 	}
+	String(String&& other)noexcept //MoveConstructor
+	{
+		
+		this->size = other.size;
+		this->str = other.str;//просто копируем адрес памяти, принадлежащий другому объекту
+	//Зануляем другой объект, чтобы его память не смог удалить деструктор
+		other.size = 0;
+		other.str = nullptr;
+		/*this->str = nullptr; 
+		*this = std::move(other);*/
+		cout << "MoveConstructor:\t" << this << endl;
+	}
 	~String()
 	{
 		delete[]str;
@@ -60,6 +72,18 @@ public:
 		this->str = new char[size] {};
 		for (int i = 0; i < size; i++)this->str[i] = other.str[i];
 		cout << "CopyAssignment:\t" << this << endl;
+		return *this;
+	}
+	String& operator=(String&& other)
+	{
+		if (this == &other)return *this;
+		delete this->str;
+		this->size = other.size;
+		this->str = other.str;
+
+		other.size = 0;
+		other.str = 0;
+		cout<<"MoveAssignment:\t"<<this<<endl;
 		return *this;
 	}
 	char& operator[](int i)
@@ -126,7 +150,7 @@ std::istream& getline(std::istream& is, String& obj)
 	return is;
 }
 //#define CONSTRUCTORS_CHECK
-//#define CLASS_WORK
+#define CLASS_WORK
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -155,19 +179,21 @@ void main()
 	delimeter;
 	String str2 = "World";
 	delimeter;
-	String str3 = str1 + str2;
+	String str3;
+	str3= str1 + str2;
 	delimeter;
 	cout << str3 << endl;
 	delimeter;
-	str1 += str2;
+	String str4 = str3; //CopyConstructor
+	/*str1 += str2;
 	cout << str1 << endl;
-	delimeter;
+	delimeter;*/
 	
 #endif // CLASS_WORK
-	String str;
+	/*String str;
 	cout << "Введите строку: ";// cin >> str;
 	getline(cin, str);
 	cout << str;
 	delimeter;
-	str.print();
+	str.print();*/
 }
