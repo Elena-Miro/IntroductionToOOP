@@ -165,6 +165,22 @@ Binary operator| (const Binary& left, const Binary& right)
 	result.get_number()[i] = left.get_capacity() > right.get_capacity() ? left.get_number()[i] : right.get_number()[i];
 	return result;
 }
+Binary operator^(Binary left, Binary right)
+{
+	if (left.get_capacity() > right.get_capacity())
+	{
+		right.set_capacity(left.get_capacity());
+	}
+	else
+	{
+		left.set_capacity(right.get_capacity());
+	}
+	Binary result;
+	result.set_capacity(left.get_capacity());
+	for (int i = 0; i < result.get_capacity(); i++)
+		result.get_number()[i] = left.get_number()[i] ^ right.get_number()[i] ? 1 : 0;
+	return result;
+}
 
 std::ostream& operator<<(std::ostream& os, const Binary& obj)
 {
@@ -191,5 +207,6 @@ void main()
 #endif // CONSRUCTOR
 	Binary bin1 = 202;
 	Binary bin2 = 27;
-	cout << (bin1 | bin2) << endl;
+	//cout << (bin1 | bin2) << endl;
+	cout << (bin1 ^ bin2) << endl;
 }
